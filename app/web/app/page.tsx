@@ -14,10 +14,9 @@ type VersionPayload = {
 };
 
 const POLL_INTERVAL_MS = 5000;
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
 async function fetchJson<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, { cache: "no-store" });
+  const response = await fetch(path, { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`Request failed: ${path} (${response.status})`);
   }

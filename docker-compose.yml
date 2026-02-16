@@ -1,0 +1,22 @@
+services:
+  api:
+    build:
+      context: ./app/api
+    environment:
+      COMMIT_SHA: dev
+      BUILD_TIME: "2026-02-16T00:00:00Z"
+      ENVIRONMENT: dev
+    expose:
+      - "8000"
+
+  web:
+    build:
+      context: ./app/web
+      args:
+        BACKEND_URL: http://api:8000
+    environment:
+      BACKEND_URL: http://api:8000
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
